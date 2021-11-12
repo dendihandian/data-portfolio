@@ -3,3 +3,6 @@
 */*.xls
 
 covid
+
+_api/**/__pycache__
+_api/.venv
