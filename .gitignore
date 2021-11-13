@@ -3,6 +3,7 @@
 */*.xls
 */**/*.model
 */**/*.joblib
+*/**/*.pickle
 
 covid
 
