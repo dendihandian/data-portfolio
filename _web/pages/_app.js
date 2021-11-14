@@ -1,13 +1,15 @@
 import '../styles/globals.css'
+import AppHeader from '../components/AppHeader'
+import AppFooter from '../components/AppFooter'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div className="wrapper">
-      <header></header>
-      <main>
+    <div className="min-h-screen bg-true-gray-900 flex flex-col">
+      <AppHeader />
+      <main className="flex-grow">
         <Component {...pageProps} />
       </main>
-      <footer></footer>
+      <AppFooter />
     </div>
   )
 }
