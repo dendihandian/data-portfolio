@@ -7,7 +7,7 @@ export default function FormSelect(props) {
             <div className="relative">
                 <select className="w-full h-12 p-2 bg-transparent block appearance-none border border-yellow-500 text-white rounded leading-tight" id={props.label}>
                     {props.options.map((option, index) => (
-                        <option class="bg-true-gray-800 focus:bg-red-500" key={index} value={option}>{option}</option>
+                        <option className="bg-true-gray-800 focus:bg-red-500" key={index} value={option}>{option}</option>
                     ))}
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-yellow-500">
