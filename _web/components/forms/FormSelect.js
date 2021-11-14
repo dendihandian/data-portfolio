@@ -5,7 +5,7 @@ export default function FormSelect(props) {
         <div className="w-full md:w-1/3 p-2 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide text-yellow-500 text-xs font-bold mb-2" htmlFor={props.label}>{props.label}</label>
             <div className="relative">
-                <select className="w-full h-12 p-2 bg-transparent block appearance-none border border-yellow-500 text-white rounded leading-tight" id={props.label}>
+                <select className="w-full h-12 p-2 bg-transparent block appearance-none border border-yellow-500 text-white rounded leading-tight" id={props.label} name={props.name}>
                     {props.options.map((option, index) => (
                         <option className="bg-true-gray-800 focus:bg-red-500" key={index} value={option}>{option}</option>
                     ))}
