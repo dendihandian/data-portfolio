@@ -3,6 +3,7 @@ import axios from 'axios';
 import FormNumber from '../../components/forms/FormNumber';
 import FormSelect from '../../components/forms/FormSelect'
 import BeatLoader from 'react-spinners/BeatLoader'
+import PacmanLoader from 'react-spinners/PacmanLoader'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -13,10 +14,14 @@ export default function BankMarketingPage() {
     const [fields, setFields] = useState({});
     const [response, setResponse] = useState('');
     const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessagePredict, setErrorMessagePredict] = useState('');
 
     useEffect(() => {
         axios.get(baseUrl + '/bank-marketing/params').then(response => {
             setFields(response.data)
+        }).catch(error => {
+            setErrorMessage(error.message)
         });
     }, []);
 
@@ -33,18 +38,34 @@ export default function BankMarketingPage() {
         axios.post(baseUrl + '/bank-marketing/predict', requestBody).then(response => {
             setResponse(response.data.response)
             setLoading(false)
+        }).catch(error => {
+            setErrorMessagePredict(error.message)
+            setLoading(false)
         });
     } 
 
     let res = (
-        <div className="text-white">Page Not Ready. Please Reload and Try Again</div>
+        <div className="flex items-center justify-center w-full text-white">
+            <PacmanLoader color="teal"/>
+        </div>
     )
+
+    if (errorMessage) {
+        res = (
+            <div className="flex items-center justify-center w-full text-white">
+                <span className="text-xs">{errorMessage}</span>
+            </div>
+        )
+    }
 
     if (fields.numerical && fields.categorical) {
 
-        let responseDisplay = response
+        let responseDisplay = <span className="text-4xl">{response}</span>
+
         if (loading) {
             responseDisplay = <BeatLoader color='teal'/>
+        } else if (errorMessagePredict) {
+            responseDisplay = <span>{errorMessagePredict}</span>
         }
 
         res = (
@@ -94,7 +115,7 @@ export default function BankMarketingPage() {
                         </button>
                     </div>
                     <div className="flex flex-col items-center justify-center w-full md:w-1/4">
-                        <div className={`border-2 w-full h-32 text-center p-12 rounded text-4xl ${response == 'Yes' ? "border-green-500 text-green-500" : (response == 'No' ? "border-red-500 text-red-500" : "border-gray-500 text-gray-500")}`}>
+                        <div className={`border-2 w-full h-32 text-center p-12 rounded ${response == 'Yes' ? "border-green-500 text-green-500" : (response == 'No' ? "border-red-500 text-red-500" : "border-gray-500 text-gray-500")}`}>
                             {responseDisplay}
                         </div>
                         <span className="mt-2 text-xl text-gray-300">Response</span>
