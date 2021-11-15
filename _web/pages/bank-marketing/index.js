@@ -3,6 +3,8 @@ import axios from 'axios';
 import FormNumber from '../../components/forms/FormNumber';
 import FormSelect from '../../components/forms/FormSelect'
 import BeatLoader from 'react-spinners/BeatLoader'
+import Head from 'next/head'
+import Link from 'next/link'
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000'
 
@@ -27,6 +29,7 @@ export default function BankMarketingPage() {
         }
 
         setLoading(true)
+        setResponse('')
         axios.post(baseUrl + '/bank-marketing/predict', requestBody).then(response => {
             setResponse(response.data.response)
             setLoading(false)
@@ -46,11 +49,26 @@ export default function BankMarketingPage() {
 
         res = (
             <form id="bank-marketing-predict-form">
-                <div className="content w-full flex flex-wrap">
+                <div className="flex flex-wrap w-full content">
+                    <Head>
+                        <title>Bank Marketing - Customer Response Predictor</title>
+                        <meta name="description" content="Predicting the bank customer response whether they will buy the campaign product or not." />
+                        <link rel="icon" href="/favicon.ico" />
+                    </Head>
+                    <Link href="/">
+                            <a className="flex text-gray-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+                                </svg>
+                                <span className="ml-2">
+                                    Back to List
+                                </span>
+                            </a>
+                    </Link>
                     <div className="w-full py-4 text-gray-300">
                         <h2 className="text-2xl">Bank Marketing - Customer Response Predictor</h2>
                     </div>
-                    <div className="w-full md:w-2/4 min-h-96 flex flex-wrap p-2 border-2 border-gray-500 rounded">
+                    <div className="flex flex-wrap w-full p-2 border-2 border-gray-500 rounded md:w-2/4 min-h-96">
                         <FormNumber name="age" key="age" label="Age" minmax={fields.numerical.age} />
                         <FormNumber name="age_group" key="age_group" label="Age Group" minmax={fields.numerical.age_group} />
                         <FormSelect name="default" key="default" label="Default" options={fields.categorical.default} />
@@ -69,13 +87,13 @@ export default function BankMarketingPage() {
                         <FormSelect name="contact" key="contact" label="Contact" options={fields.categorical.contact} />
                         <FormNumber name="duration" key="duration" label="Duration" minmax={fields.numerical.duration} />
                     </div>
-                    <div className="w-full md:w-1/4 min-h-96 flex justify-center items-center relative py-16">
-                        <div className="w-full border border-gray-500 hidden md:block"></div>
-                        <button className="absolute bg-transparent border-2 hover:border-teal-600 border-teal-500 rounded p-4 px-8 font-bold text-white hover:text-teal-500 bg-true-gray-800" onClick={predict} disabled={loading ? 'disabled' : ''} type={'button'}>
+                    <div className="relative flex items-center justify-center w-full py-16 md:w-1/4 min-h-96">
+                        <div className="hidden w-full border border-gray-500 md:block"></div>
+                        <button className="absolute p-4 px-8 font-bold text-white bg-transparent border-2 border-teal-500 rounded hover:border-teal-600 hover:text-teal-500 bg-true-gray-800" onClick={predict} disabled={loading ? 'disabled' : ''} type={'button'}>
                             <span className={loading ? 'opacity-25' : `opacity-100`}>Predict!</span>
                         </button>
                     </div>
-                    <div className="w-full md:w-1/4 flex flex-col justify-center items-center">
+                    <div className="flex flex-col items-center justify-center w-full md:w-1/4">
                         <div className={`border-2 w-full h-32 text-center p-12 rounded text-4xl ${response == 'Yes' ? "border-green-500 text-green-500" : (response == 'No' ? "border-red-500 text-red-500" : "border-gray-500 text-gray-500")}`}>
                             {responseDisplay}
                         </div>
