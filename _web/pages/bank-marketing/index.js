@@ -9,6 +9,17 @@ import Link from 'next/link'
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000'
 
+function minmaxToCategories(minmax) {
+
+    let categories = []
+
+    for (let index = minmax[0]; index <= minmax[1]; index++) {
+        categories.push(index)
+    }
+
+    return categories
+}
+
 export default function BankMarketingPage() {
 
     const [fields, setFields] = useState({});
@@ -90,8 +101,8 @@ export default function BankMarketingPage() {
                         <h2 className="text-2xl">Bank Marketing - Customer Response Predictor</h2>
                     </div>
                     <div className="flex flex-wrap w-full p-2 border-2 border-gray-500 rounded md:w-2/4 min-h-96">
-                        <FormNumber name="age" key="age" label="Age" minmax={fields.numerical.age} />
-                        <FormNumber name="age_group" key="age_group" label="Age Group" minmax={fields.numerical.age_group} />
+                        <FormSelect name="age" key="age" label="Age" options={minmaxToCategories(fields.numerical.age)} />
+                        <FormSelect name="age_group" key="age_group" label="Age Group" options={minmaxToCategories(fields.numerical.age_group)} />
                         <FormSelect name="default" key="default" label="Default" options={fields.categorical.default} />
                         <FormSelect name="marital" key="marital" label="Marital" options={fields.categorical.marital} />
                         <FormSelect name="education" key="education" label="Education" options={fields.categorical.education} />
@@ -102,9 +113,9 @@ export default function BankMarketingPage() {
                         <FormSelect name="targeted" key="targeted" label="Targeted" options={fields.categorical.targeted} />
                         <FormSelect name="housing" key="housing" label="Housing" options={fields.categorical.housing} />
                         <FormSelect name="loan" key="loan" label="Loan" options={fields.categorical.loan} />
-                        <FormNumber name="day" key="day" label="Day" minmax={fields.numerical.day} />
+                        <FormSelect name="day" key="day" label="Day" options={minmaxToCategories(fields.numerical.day)} />
                         <FormSelect name="month" key="month" label="Month" options={fields.categorical.month} />
-                        <FormSelect name="campaign" key="campaign" label="Campaign" options={fields.numerical.campaign} />
+                        <FormSelect name="campaign" key="campaign" label="Campaign" options={minmaxToCategories(fields.numerical.campaign)} />
                         <FormSelect name="contact" key="contact" label="Contact" options={fields.categorical.contact} />
                         <FormNumber name="duration" key="duration" label="Duration" minmax={fields.numerical.duration} />
                     </div>

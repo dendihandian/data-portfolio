@@ -20,7 +20,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
         {portfolios.map((portfolio, index) => (
           <div key={index} className="flex flex-col w-full h-32 border border-white rounded">
             <div className="px-4 py-3 leading-none text-left">
@@ -29,7 +29,7 @@ export default function Home() {
             <div className="flex-grow px-4">
               <p className="text-sm leading-none text-left text-white">{portfolio.desc}</p>
             </div>
-            <div className="flex justify-center px-3 py-3 sm:justify-end">
+            <div className="flex justify-center px-3 py-3 md:justify-end">
               <a className="px-2 py-1 mr-2 text-xs text-white bg-green-500 rounded" href={portfolio.notebook_url} target="_blank" rel="noreferrer">Open The Notebook</a>
               <Link href={portfolio.page_path}>
                 <a className="px-2 py-1 text-xs text-white bg-teal-500 rounded">Go To The Page</a>
