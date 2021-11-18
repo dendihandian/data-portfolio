@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import pandas as pd
+import numpy as np
 import pickle
 
 app = FastAPI()
@@ -46,6 +47,9 @@ bm_model = pickle.load(open('../bank-marketing/model.pickle', 'rb'))
 categorical_encoder = pickle.load(open('../bank-marketing/categorical.pickle', 'rb'))
 numerical_limit = pickle.load(open('../bank-marketing/numerical.pickle', 'rb'))
 response_decoder = {v: k for k, v in categorical_encoder['response'].items()}
+salary_scaler = pickle.load(open('../bank-marketing/scaler_salary.pickle', 'rb'))
+balance_scaler = pickle.load(open('../bank-marketing/scaler_balance.pickle', 'rb'))
+duration_scaler = pickle.load(open('../bank-marketing/scaler_duration.pickle', 'rb'))
 
 @app.get("/")
 def read_root():
@@ -67,6 +71,10 @@ def bank_marketing_params():
 
 @app.post("/bank-marketing/predict")
 def bank_marketing_predict(param: BankMarketingPredict):
+
+    param.__setattr__('salary', salary_scaler.transform(np.array([param.__getattribute__('salary')]).reshape(1, -1))[0][0])
+    param.__setattr__('balance', balance_scaler.transform(np.array([param.__getattribute__('balance')]).reshape(1, -1))[0][0])
+    param.__setattr__('duration', duration_scaler.transform(np.array([param.__getattribute__('duration')]).reshape(1, -1))[0][0])
 
     encoded_param = {}
     for key in categorical_encoder.keys():
