@@ -1,9 +1,9 @@
-import React from 'react'
+ import React from 'react'
 
 export default function AppFooter() {
     return (
         <footer className="text-gray-600 body-font" >
-            <div className="container flex flex-col items-center py-5 mx-auto md:flex-row">
+            <div className="container flex flex-col items-center px-10 py-5 mx-auto md:flex-row">
                 <p className="mt-4 text-sm text-gray-500 md:py-2 md:mt-0">© Dendi Handian 2020</p>
                 <p className="hidden mx-1 md:block">-</p>
                 <p className="mt-4 text-sm text-gray-500 md:py-2 md:mt-0">Icons by <a className="hover:text-purple-500" href="https://heroicons.com" target="_blank" rel="noreferrer">Heroicons</a> & <a className="hover:text-blue-500" href="https://fontawesome.com/license" target="_blank" rel="noreferrer">Font Awesome</a></p>
