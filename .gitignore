@@ -1,6 +1,7 @@
 */*.csv
 */*.xlsx
 */*.xls
+*/*.json
 */**/*.model
 */**/*.joblib
 */**/*.pickle
