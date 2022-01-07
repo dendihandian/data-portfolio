@@ -1,10 +1,5 @@
-from typing import Optional
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-import pandas as pd
-import numpy as np
-import pickle
 
 from routers import youtube_views
 from routers import bank_marketing
