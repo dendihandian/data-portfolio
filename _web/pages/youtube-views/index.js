@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import FormNumber from '../../components/forms/FormNumber';
-import FormSelect from '../../components/forms/FormSelect'
 import BeatLoader from 'react-spinners/BeatLoader'
 import PacmanLoader from 'react-spinners/PacmanLoader'
 import Head from 'next/head'
@@ -23,13 +22,13 @@ function minmaxToCategories(minmax) {
 export default function BankMarketingPage() {
 
     const [fields, setFields] = useState({});
-    const [response, setResponse] = useState('');
+    const [views, setViews] = useState('');
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [errorMessagePredict, setErrorMessagePredict] = useState('');
 
     useEffect(() => {
-        axios.get(baseUrl + '/bank-marketing/params').then(response => {
+        axios.get(baseUrl + '/youtube-views/params').then(response => {
             setFields(response.data)
         }).catch(error => {
             setErrorMessage(error.message)
@@ -38,16 +37,16 @@ export default function BankMarketingPage() {
 
     const predict = () => {
 
-        const formData = new FormData(document.getElementById("bank-marketing-predict-form"))
+        const formData = new FormData(document.getElementById("youtube-views-predict-form"))
         let requestBody = {}
         for (var pair of formData.entries()) {
             requestBody[pair[0]] = pair[1]
         }
 
         setLoading(true)
-        setResponse('')
-        axios.post(baseUrl + '/bank-marketing/predict', requestBody).then(response => {
-            setResponse(response.data.response)
+        setViews('')
+        axios.post(baseUrl + '/youtube-views/predict', requestBody).then(response => {
+            setViews(response.data.views)
             setLoading(false)
         }).catch(error => {
             setErrorMessagePredict(error.message)
@@ -69,9 +68,9 @@ export default function BankMarketingPage() {
         )
     }
 
-    if (fields.numerical && fields.categorical) {
+    if (fields.numerical) {
 
-        let responseDisplay = <span className="text-4xl">{response}</span>
+        let responseDisplay = <span className="text-4xl">{Math.round(views, 3)}</span>
 
         if (loading) {
             responseDisplay = <BeatLoader color='teal'/>
@@ -80,10 +79,10 @@ export default function BankMarketingPage() {
         }
 
         res = (
-            <form id="bank-marketing-predict-form">
+            <form className="w-full" id="youtube-views-predict-form">
                 <div className="flex flex-wrap w-full content">
                     <Head>
-                        <title>Bank Marketing - Customer Response Predictor</title>
+                        <title>Trending Youtube Video Statistics - Views Predictor</title>
                         <meta name="description" content="Predicting the bank customer response whether they will buy the campaign product or not." />
                         <link rel="icon" href="/favicon.ico" />
                     </Head>
@@ -98,26 +97,12 @@ export default function BankMarketingPage() {
                             </a>
                     </Link>
                     <div className="w-full py-4 text-gray-300">
-                        <h2 className="text-2xl">Bank Marketing - Customer Response Predictor</h2>
+                        <h2 className="text-2xl">Trending Youtube Video Statistics - Views Predictor</h2>
                     </div>
-                    <div className="flex flex-wrap w-full p-2 border-2 border-gray-500 rounded md:w-2/4 min-h-96">
-                        <FormSelect name="age" key="age" label="Age" options={minmaxToCategories(fields.numerical.age)} />
-                        <FormSelect name="age_group" key="age_group" label="Age Group" options={minmaxToCategories(fields.numerical.age_group)} />
-                        <FormSelect name="default" key="default" label="Default" options={fields.categorical.default} />
-                        <FormSelect name="marital" key="marital" label="Marital" options={fields.categorical.marital} />
-                        <FormSelect name="education" key="education" label="Education" options={fields.categorical.education} />
-                        <FormSelect name="marital_education" key="marital_education" label="Marital-Education" options={fields.categorical.marital_education} />
-                        <FormSelect name="job" key="job" label="Job" options={fields.categorical.job} />
-                        <FormNumber name="salary" key="salary" label="Salary" minmax={fields.numerical.salary} />
-                        <FormNumber name="balance" key="balance" label="Balance" minmax={fields.numerical.balance} />
-                        <FormSelect name="targeted" key="targeted" label="Targeted" options={fields.categorical.targeted} />
-                        <FormSelect name="housing" key="housing" label="Housing" options={fields.categorical.housing} />
-                        <FormSelect name="loan" key="loan" label="Loan" options={fields.categorical.loan} />
-                        <FormSelect name="day" key="day" label="Day" options={minmaxToCategories(fields.numerical.day)} />
-                        <FormSelect name="month" key="month" label="Month" options={fields.categorical.month} />
-                        <FormSelect name="campaign" key="campaign" label="Campaign" options={minmaxToCategories(fields.numerical.campaign)} />
-                        <FormSelect name="contact" key="contact" label="Contact" options={fields.categorical.contact} />
-                        <FormNumber name="duration" key="duration" label="Duration" minmax={fields.numerical.duration} />
+                    <div className="flex flex-wrap items-center w-full p-2 border-2 border-gray-500 rounded md:w-2/4 min-h-96">
+                        <FormNumber name="likes" key="likes" label="likes" minmax={fields.numerical.likes} />
+                        <FormNumber name="dislikes" key="dislikes" label="dislikes" minmax={fields.numerical.dislikes} />
+                        <FormNumber name="comment_count" key="comment_count" label="comment count" minmax={fields.numerical.comment_count} />
                     </div>
                     <div className="relative flex items-center justify-center w-full py-16 md:w-1/4 min-h-96">
                         <div className="hidden w-full border border-gray-500 md:block"></div>
@@ -126,10 +111,10 @@ export default function BankMarketingPage() {
                         </button>
                     </div>
                     <div className="flex flex-col items-center justify-center w-full md:w-1/4">
-                        <div className={`border-2 w-full h-32 text-center p-12 rounded ${response == 'Yes' ? "border-green-500 text-green-500" : (response == 'No' ? "border-red-500 text-red-500" : "border-gray-500 text-gray-500")}`}>
+                        <div className={`border-2 w-full h-32 text-center p-12 rounded border-green-500 text-green-500`}>
                             {responseDisplay}
                         </div>
-                        <span className="mt-2 text-xl text-gray-300">Response</span>
+                        <span className="mt-2 text-xl text-gray-300">Views</span>
                     </div>
                 </div>
             </form>

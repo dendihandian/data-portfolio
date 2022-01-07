@@ -1,9 +1,11 @@
 */*.csv
 */*.xlsx
 */*.xls
+*/*.json
 */**/*.model
 */**/*.joblib
-# */**/*.pickle
+*/**/*.pickle
+*/**/mlruns
 
 covid
 
