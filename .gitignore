@@ -4,7 +4,6 @@
 */*.json
 */**/*.model
 */**/*.joblib
-*/**/*.pickle
 */**/mlruns
 
 covid
