@@ -12,6 +12,7 @@ from routers import bank_marketing
 app = FastAPI()
 
 origins = [
+    "http://localhost:3000",
     "https://data-portfolio.netlify.app",
 ]
 

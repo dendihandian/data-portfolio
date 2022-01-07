@@ -8,6 +8,12 @@ const portfolios = [
     'page_path': '/bank-marketing',
     'notebook_url': 'https://github.com/dendihandian/data-portfolio/blob/master/bank-marketing/bank-marketing.ipynb'
   },
+  {
+    'name': 'Trending Youtube Video Statistics',
+    'desc': 'Predicting the views count of a youtube video.',
+    'page_path': '/youtube-views',
+    'notebook_url': 'https://github.com/dendihandian/data-portfolio/blob/master/youtube-views/youtube-views.ipynb'
+  },
 ]
 
 
