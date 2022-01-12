@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
       <AppHeader />
 
       <div className="flex justify-center w-full px-10 py-4 text-white">
-        <p>Unfortunately, the API is down due to limitation of Heroku free-tier and all the prediction pages cannot be used. But you can see the <a className="underline" href="https://github.com/dendihandian/data-portfolio" target="_blank" rel="noreferrer">github repository</a> instead about how I built the API and Web UI.</p>
+        <p>Unfortunately, the API exceeds the Heroku free-tier plan and all the prediction pages cannot be used. But you can see the <a className="underline" href="https://github.com/dendihandian/data-portfolio" target="_blank" rel="noreferrer">github repository</a> instead about how I built the API and Web UI.</p>
       </div> 
 
       <main className="flex items-center flex-grow px-10">
