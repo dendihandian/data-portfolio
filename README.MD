@@ -1,9 +1,9 @@
 # Data Portfolio
 
 ## Notebook Available
-- [Bank Marketing](https://github.com/dendihandian/data-portfolio/blob/master/bank-marketing/bank-marketing.ipynb)
-- [Transfermarkt Transfers](https://github.com/dendihandian/data-portfolio/blob/master/transfermarkt-transfers/transfermarkt-transfers.ipynb)
-- [Youtube Trending Video Statistics](https://github.com/dendihandian/data-portfolio/blob/master/youtube-views/youtube-views.ipynb)
+- [Bank Marketing](https://github.com/dendihandian/data-portfolio/blob/master/bank-marketing/bank-marketing.ipynb) (classification)
+- [Transfermarkt Transfers](https://github.com/dendihandian/data-portfolio/blob/master/transfermarkt-transfers/transfermarkt-transfers.ipynb) (clustering)
+- [Youtube Trending Video Statistics](https://github.com/dendihandian/data-portfolio/blob/master/youtube-views/youtube-views.ipynb) (regression)
 
 ## API and Web Development
 
